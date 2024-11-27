@@ -1,0 +1,103 @@
+<p>edit works!</p>
+
+<form  [formGroup]="editForm" (ngSubmit)="onSubmit()" class="container mt-4" style="max-width: 500px; padding: 15px;">
+    <div class="mb-3">
+    
+    <label for="first-name form-label">First Name:</label>
+    <input id="first-name" type="text"  formControlName="firstName" class="form-control" [ngClass]="{ 'is-invalid': editForm.get('firstName')?.invalid && submitted, 'is-valid': editForm.get('firstName')?.valid && submitted }"/>
+
+    <div *ngIf="editForm.get('firstName')?.invalid && submitted" class="text-danger">
+        
+        <div *ngIf="editForm.get('firstName')?.errors?.['required']">
+            First name is required
+        </div >
+        <div *ngIf="editForm.get('firstName')?.errors?.['minlength']">
+            First name must be 3 character long
+        </div>
+    </div>    
+        
+    </div>
+    
+    <div class="mb-3">
+
+        <label for="last-name">Last Name:</label>
+        <input id="last-name" type="text" formControlName="lastName" class="form-control"/>
+    </div>
+
+      <div class="mb-3">    
+
+        <label for="mobile-no">Mobile no.:</label>
+        <input id="mobile-no" type="text" formControlName="mobile" class="form-control" [ngClass]="{ 'is-invalid': editForm.get('mobile')?.invalid && submitted, 'is-valid': editForm.get('mobile')?.valid && submitted }"/>
+        <div *ngIf="editForm.get('mobile')?.invalid && submitted" class="text-danger">
+            Mobile number is required.
+        
+        <div *ngIf="editForm.get('mobile')?.errors?.['pattern']" class="text-danger">
+            Enter valid mobile number only      
+        </div>
+        <div *ngIf="editForm.get('mobile')?.errors?.['minlength']" class="text-danger">
+            Mobile number must be 10 digits.
+        </div>
+        <div *ngIf="editForm.get('mobile')?.errors?.['maxlength']" class="text-danger">
+            Max  10 digits mobile number allowed.
+        </div>
+        </div>
+      </div>  
+    
+      <div class="mb-3">
+
+        <label for="address">Address:</label>
+         <textarea name="address"id="address" type="text" formControlName="address" class="form-control"></textarea>
+      </div>
+
+      <div class="mb-3">
+
+        <label for="email">Email</label>
+        <input id="email" type="email" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': editForm.get('email')?.invalid && submitted, 'is-valid': editForm.get('email')?.valid && submitted }"/>
+        <div *ngIf="editForm.get('email')?.invalid && submitted" class="text-danger">
+            Email address is required.
+        
+        <div *ngIf="editForm.get('email')?.errors?.['email']" class="text-danger">
+            Eneter valid email address
+        </div>
+        </div>
+      </div>
+      
+      <div class="mb-3">
+
+        <label for="wesbite">Personal wesbite:</label>
+        <input id="wesbite" type="url" formControlName="website" class="form-control" [ngClass]="{ 'is-invalid': editForm.get('website')?.invalid && submitted, 'is-valid': editForm.get('website')?.valid && submitted }"/>
+        <div *ngIf="editForm.get('website')?.invalid && submitted" class="text-danger">
+            Personal website required.
+        
+        <div *ngIf="editForm.get('website')?.errors?.['pattern']" class="text-danger">
+            Enter valid Personal wesbite.
+        </div>
+        </div>
+
+      </div>
+        
+       <div class="mb-3">
+
+        <label for="image">Image</label>
+        <input id="image" type="file" formControlName="image" class="form-control" (change)="onImageChange($event) " [ngClass]="{ 'is-invalid': editForm.get('image')?.invalid && submitted, 'is-valid': editForm.get('image')?.valid && submitted }"/>
+        <div *ngIf="editForm.get('image')?.invalid && submitted" class="text-danger">
+            Upload image.
+        <div *ngIF="editForm.get('image')?.errors?.['required']" class="text-danger">
+            Image is required
+        </div>
+        <div  *ngIf="editForm.get('image')?.errors?.['fileType']" class="text-danger">
+            Only PNG and JPG files are allowed.
+        </div>
+        <div *ngIF="editForm.get('image')?.errors?.['fileSize']" class="text-danger">
+            File size must be less than 2MB
+        </div>
+        </div>
+
+       </div>
+        
+
+        <button type="submit" class="btn btn-success me-3"  >Update form</button>
+        <button type="button" [routerLink]="['/response']" class="btn btn-secondary">Cancel</button>
+        
+    
+</form>
